@@ -1,7 +1,7 @@
 # Build image
 FROM swift:4.1 as builder
 RUN apt-get -qq update && apt-get -q -y install \
-  your-dependencies-here # e.g. libmysqlclient-dev
+  libssl-dev pkg-config # package dependencies here
 WORKDIR /app
 COPY . .
 RUN mkdir -p /build/lib && cp -R /usr/lib/swift/linux/*.so /build/lib
@@ -17,5 +17,5 @@ COPY Resources/ ./Resources/
 COPY Public/ ./Public/
 COPY --from=builder /build/bin/Run .
 COPY --from=builder /build/lib/* /usr/lib/
-EXPOSE 8080
+EXPOSE SQLITE_PATH 8080
 CMD ["./Run", "serve", "--env", "production", "--hostname", "0.0.0.0"]
