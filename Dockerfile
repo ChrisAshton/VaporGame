@@ -1,7 +1,7 @@
 # Build image
 FROM swift:4.1 as builder
 RUN apt-get -qq update && apt-get -q -y install \
-  libssl-dev pkg-config docker # package dependencies here
+  libssl-dev pkg-config
 WORKDIR /app
 COPY . .
 RUN mkdir -p /build/lib && cp -R /usr/lib/swift/linux/*.so /build/lib
@@ -19,5 +19,3 @@ COPY --from=builder /build/bin/Run .
 COPY --from=builder /build/lib/* /usr/lib/
 EXPOSE SQLITE_PATH 8080
 CMD ["./Run", "serve", "--env", "production", "--hostname", "0.0.0.0"]
-
-# docker build -t vaporgame:dev -f Dockerfile . && docker run -it -p 8080:8080 -v "$PWD":/app --rm vaporgame:dev
