@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Guessing Game</title>
+  </head>
+  <body class="container">
+    <br>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Guessing Game!</h3>
+            <p>You have #(tries) tries to guess the correct number between 1 and 100</p>
+            <form action="/guess" method="post">
+              <div class="form-group">
+                <label for="guess">Your Guess</label>
+                <input type="text" name="guess" class="form-control" id="guess"/>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="guess">
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

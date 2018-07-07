@@ -1,3 +1,5 @@
+# docker build -t vaporgame:dev -f Dockerfile-dev . && docker run -it -p 8080:8080 -v "$PWD":/app --rm vaporgame:dev
+
 FROM swift:4.1
 RUN apt-get -qq update && apt-get -q -y install \
   libssl-dev pkg-config # e.g. libmysqlclient-dev libpq-dev etc
