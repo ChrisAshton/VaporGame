@@ -18,17 +18,13 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     // boilerplate to set leafprovider as preferred ViewRenderer
     config.prefer(LeafRenderer.self, for: ViewRenderer.self)
 
-    // Configure a SQLite database
-    let sqlite = try SQLiteDatabase(storage: .memory)
-
-    /// Register the configured SQLite database to the database config.
+    // Initiate database service
     var databases = DatabasesConfig()
-    databases.add(database: sqlite, as: .sqlite)
+    try databases.add(database: SQLiteDatabase(storage: .memory), as: .sqlite)
     services.register(databases)
-
-    /// Configure migrations
+    
+    // Register migration service to introduce model to database
     var migrations = MigrationConfig()
-    migrations.add(model: Todo.self, database: .sqlite)
+    migrations.add(model: GameState.self, database: .sqlite) // adding things to migrations...
     services.register(migrations)
-
 }

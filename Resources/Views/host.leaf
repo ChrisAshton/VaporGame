@@ -12,14 +12,15 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Guessing Game!</h3>
-            <p>You have #(tries) tries to guess the correct number between 1 and 100</p>
+            <p>You have #(remainingGuesses) tries to guess the correct number between 1 and 100</p>
             <form action="/guess" method="post">
               <div class="form-group">
-                <label for="guess">Your Guess</label>
+                <label for="guess">Enter a number</label>
                 <input type="text" name="guess" class="form-control" id="guess"/>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="guess">
               </div>
+              <p hidden id="game_id">#(id)</p>
               </div>
             </form>
           </div>
