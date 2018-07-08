@@ -23,9 +23,9 @@ public func routes(_ router: Router) throws {
     // Sesssions Router
     let sessions = router.grouped("sessions").grouped(SessionsMiddleware.self)
     
-    sessions.get("get/name") { req -> String in
+    sessions.get("get") { req -> String in
         // access "name" from session or return n/a
-        return try req.session()["name"] ?? "n/a"
+        return try req.session().data["session-entity-id"] ?? "n/a"
     }
     
     sessions.get("set/name", String.parameter) { req -> String in
