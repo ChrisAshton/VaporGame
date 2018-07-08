@@ -12,6 +12,14 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     try routes(router)
     services.register(router, as: Router.self)
     
+    // Register middleware
+    var middlewares = MiddlewareConfig() // Create _empty_ middleware config
+    /// middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
+    middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
+    middlewares.use(SessionsMiddleware.self)
+    services.register(middlewares)
+    
+    
     // Register LeafProvider
     try services.register(LeafProvider())
     
@@ -22,6 +30,8 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var databases = DatabasesConfig()
     try databases.add(database: SQLiteDatabase(storage: .memory), as: .sqlite)
     services.register(databases)
+    
+    config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
     
     // Register migration service to introduce model to database
     var migrations = MigrationConfig()
