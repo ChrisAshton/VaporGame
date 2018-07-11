@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="2; URL=http://localhost:8080/host/#(id)/guessing-game">
+    <meta name="keywords" content="automatic redirection">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Guessing Game</title>
   </head>
@@ -16,7 +18,7 @@
               <form action="/host/#(id)/guessing-game" method="post">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <input class="btn btn-primary" type="submit" value="Start Game!"/>
+                    <input class="btn btn-primary" type="submit" value="Start Game!" hidden/>
                   </span>
                 </div>
 
