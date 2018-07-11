@@ -12,17 +12,22 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Guessing Game!</h3>
+            #if(remainingGuesses != 10){
+              <h5>Wrong answer</h5>
+            }
             <p>You have #(remainingGuesses) tries to guess the correct number between 1 and 100</p>
-            <form action="/guess" method="post">
+
+            <form action="/guess/#(id)" method="post">
               <div class="form-group">
                 <label for="guess">Enter a number</label>
-                <input type="text" name="guess" class="form-control" id="guess"/>
+                <input type="text" name="numberToGuess" class="form-control"/> <!-- add value="#(numberToGuess) to test" -->
               <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="guess">
               </div>
-              <p hidden id="game_id">#(id)</p>
               </div>
             </form>
+
+
           </div>
         </div>
       </div>

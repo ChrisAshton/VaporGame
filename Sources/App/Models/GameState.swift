@@ -6,21 +6,21 @@ final class GameState: SQLiteModel  {
     var id: Int?
     
     // Game constants
-    let maxAttemps: UInt8?
-    let minValue: UInt8?
-    let maxValue: UInt8?
+    let maxAttempts: Int
+    let minValue: Int
+    let maxValue: Int
     
     // Game variables
-    private var numberToGuess: UInt8?
-    var remainingGuesses: UInt8?
+    var numberToGuess: Int
+    var remainingGuesses: Int
     
     // Constructor
     init(id: Int? = nil) {
         self.id = id
-        maxAttemps = 10
+        maxAttempts = 10
         minValue = 1
-        maxValue = 100
-        numberToGuess = UInt8(arc4random_uniform(100) + 1)
+        maxValue = 10
+        numberToGuess = Int(arc4random_uniform(100) + 1)
         remainingGuesses = 10
     }
 }
@@ -33,3 +33,4 @@ extension GameState: Content {}
 
 // Allows to be used as dynamic parameter in route definitions
 extension GameState: Parameter {}
+

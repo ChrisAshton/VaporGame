@@ -4,39 +4,26 @@ import Leaf
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
 
-    // Basic "Hello, world!" example
-    router.get("hello") { req in
-        return "Hello, world!"
-    }
-
-    // Example of configuring a controller
-    let todoController = TodoController()
-    router.get("todos", use: todoController.index)
-    router.post("todos", use: todoController.create)
-    router.delete("todos", Todo.parameter, use: todoController.delete)
-
     // Game routes
     let controller = GameController()
-    router.get("guessing-game", use: controller.newGame)
-    router.get("host", use: controller.renderHost)
     
-    // Sesssions Router
-    let sessions = router.grouped("sessions").grouped(SessionsMiddleware.self)
+    router.get("guessing-game" , use: controller.welcome)
+    router.get("youwin", use: controller.youWin)
+    router.get("host", GameState.parameter, "guessing-game", use: controller.renderHost)
     
-    sessions.get("get") { req -> String in
-        // access "name" from session or return n/a
-        return try req.session().data["session-entity-id"] ?? "n/a"
-    }
+    router.post("host", GameState.parameter, "guessing-game", use: controller.renderHost)
+    router.post("guess", GameState.parameter, use: controller.guess)
     
-    sessions.get("set/name", String.parameter) { req -> String in
-        // get router parameter
-        let name = try req.parameters.next(String.self)
-        
-        // set the name to session at key "name"
-        try req.session()["name"] = name
-        
-        // return newly set name
-        return name
-    }
+    
 
+
+
+    
+    router.get("look") { req -> Future<[GameState]> in
+        return GameState.query(on: req).all()
+    }
+    
+    
+   // router.post("users", User.parameter, "update", use: userController.update)
+    
 }
