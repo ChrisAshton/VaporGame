@@ -3,11 +3,6 @@ import Vapor
 // controls logic of guessing game
 final class GameController {
     
-    func isInteger(_ integer: Any) -> Int? {
-        guard let number = integer as? Int else { return nil}
-        return number
-    }
-    
     func welcome(_ req: Request) throws -> Future<View> {
         let game = GameState()
         let data = game.save(on: req)
